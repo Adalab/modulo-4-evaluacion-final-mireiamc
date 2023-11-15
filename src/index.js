@@ -3,12 +3,12 @@ const cors = require('cors');
 const mysql = require('mysql2/promise');
 require('dotenv').config();
 
-// create and config server
+// Creación y configuración del server
 const server = express();
 server.use(cors());
 server.use(express.json());
 
-// init express aplication
+// Init express aplication
 const serverPort = 3001;
 server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
@@ -41,7 +41,6 @@ server.get('/recipes', async (req, res) => {
 // Endpoint para acceder a la información de una receta según el id del elemento en la BD.
 server.get('/recipes/:id', async (req, res) => {
   const connection = await getConnection();
-  // La siguiente linea, le pedimos que en el enpoint /:id ese parametro sea variable segun lo que pongamos.
   const recipeID = req.params.id;
   const query = 'SELECT * FROM recipes WHERE id = ?';
   const [results, fields] = await connection.query(query, [recipeID]);
@@ -54,11 +53,12 @@ server.post('/recipes', async (req, res) => {
   try {
     const connection = await getConnection();
     const query =
-      'INSERT INTO recipes (name, ingredientes, instructions) VALUES (?, ?, ?);';
+      'INSERT INTO recipes (name, ingredientes, instructions, film_id) VALUES (?, ?, ?, ?);';
     const [results, fields] = await connection.query(query, [
       req.body.name,
       req.body.ingredientes,
       req.body.instructions,
+      req.body.film_id,
     ]);
     connection.end();
     res.json({
@@ -73,28 +73,49 @@ server.post('/recipes', async (req, res) => {
   }
 });
 
-// server.put('/recipes/:id', async (req, res) => {
-//   try {
-//     const connection = await getConnection();
-//     // La siguiente linea, le pedimos que en el enpoint /:id ese parametro sea variable segun lo que pongamos.
-//     const recipeID = req.params.id;
-//     const query =
-//       'UPDATE recipes SET name = ?, ingredientes = ?, instructions = ? WHERE id= ?;';
-//     const [results, fields] = await connection.query(query, [
-//       req.body.name,
-//       req.body.ingredientes,
-//       req.body.instructions,
-//       recipeID,
-//     ]);
-//     connection.end();
-//     res.json({
-//       success: true,
-//     });
-//   } catch (error) {
-//     res.json({
-//       succes: false,
-//       message:
-//         'Revisa que todos los campos hayan sido completados',
-//     });
-//   }
-// });
+// Endpoint para poder actualizar datos de la receta que quieras segun id.
+server.put('/recipes/:id', async (req, res) => {
+  try {
+    const connection = await getConnection();
+    const recipeID = req.params.id;
+    const query =
+      'UPDATE recipes SET name = ?, ingredientes = ?, instructions = ?, film_id = ? WHERE id= ?;';
+    const [results, fields] = await connection.query(query, [
+      req.body.name,
+      req.body.ingredientes,
+      req.body.instructions,
+      req.body.film_id,
+      recipeID,
+    ]);
+    connection.end();
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    res.json({
+      succes: false,
+      message: 'Revisa que todos los campos hayan sido completados',
+    });
+  }
+});
+
+// Endpoint para eliminar recetas en función del id.
+server.delete('/recipes/:id', async (req, res) => {
+  try {
+    const connection = await getConnection();
+    const recipeID = req.params.id;
+
+    const query = 'DELETE FROM recipes WHERE id = ?';
+    const [results] = await connection.query(query, [recipeID]);
+    connection.end();
+    console.log(results);
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: 'No se ha podido eliminar el contenido seleccionado',
+    });
+  }
+});
