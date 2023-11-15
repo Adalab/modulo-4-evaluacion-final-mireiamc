@@ -56,7 +56,7 @@ CREATE TABLE `recipes` (
   PRIMARY KEY (`id`),
   KEY `fk_film_id` (`film_id`),
   CONSTRAINT `fk_film_id` FOREIGN KEY (`film_id`) REFERENCES `films` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `recipes` (
 
 LOCK TABLES `recipes` WRITE;
 /*!40000 ALTER TABLE `recipes` DISABLE KEYS */;
-INSERT INTO `recipes` VALUES (1,NULL,'Emparedado de bizcocho Victoria','Harina, levadura, sal, mantequilla, azucar, huevos, mermelada de frambuesa, azucar glass, nata montada.','Batir con la batidora electrica todos los ingredientes'),(2,NULL,'Emparedado de bizcocho y crema','Leche, nata liquida, azucar, harina de maiz, sal, yemas de huevo, vainilla, mantequilla','Batir con la batidora electrica todo muy bien.'),(3,NULL,'Pudin de tia Petunia','Base de bizcocho, mermelada de fresa, natillas, fresas naturales, nata montada, almendras tostadas','Montar todo.');
+INSERT INTO `recipes` VALUES (1,4,'Pastel de Ron Weasly','1 taza y 1/2 de harina de trigo, 1 cucharadita de levadura, 1/4 de cucharadita de sal, 1 pastilla y 1/2 de mantequilla a temperatura ambiente, 1 taza de azúcar, 3 huevos a temperatura ambiente, 1/2 ta','Batir con la batidora electrica todos los ingredientes juntos e introducir en el horno a 180 grados unos 40min o hasta pinchar con un palillo y que salga totalmente limpio. '),(2,1,'Pastel de Hagrid','1 taza y 1/2 de harina de trigo, 1 cucharadita de levadura, 1/4 cucharadita de sal, 1 pastilla y 1/2 de mantequilla, 1 taza de azúcar, 3 huevos. Para el relleno: 1 taza de leche entera, 1/2 taza de na','Batir con la batidora electrica todos los ingredientes juntos e introducir en el horno a 180 grados unos 40min o hasta pinchar con un palillo y que salga totalmente limpio. Para el relleno montar todos los ingredientes juntos hasta formar una crema. Rellenar el bizcocho previamente enfriado.'),(3,2,'Pudin de tia Petunia','Una base de bizcocho a tu eleccion partida en rebanadas de 1cm de grosor, 1/2 taza de mermelada de fresa, 1/2kg de fresas naturales, nata montada, 1 cucharada sopera de almendras tostadas','Forrar un molde con trocitos de bizcocho alrededor y en la base. Rellenar con una primera capa de mermelada y nata montada, añadir otra capa de bizcocho y volver a cerrar con nata montada y mermelada de fresa. Seguir así hasta conseguir la altura deseada. Acabar decorando en la parte superior con fresas naturales. '),(7,3,'Tarta de Hermione','1 taza y 1/2 de harina de trigo, 1/2 taza de almendras molidas, 1 cucharadita de levadura, 1 pastilla y 1/2 de mantequilla, 1 taza de azucar, 3 huevos. 1/2 taza de leche entera a temperatura ambiente.','Batir con la batidora electrica todos los ingredientes juntos e introducir en el horno a 180 grados unos 40min o hasta pinchar con un palillo y que salga totalmente limpio. Para el relleno montar todos los ingredientes juntos hasta formar una crema. Rellenar el bizcocho y decorar con la mermelada de crezas y las cerezas. ');
 /*!40000 ALTER TABLE `recipes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -78,4 +78,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-14 20:13:37
+-- Dump completed on 2023-11-15 12:12:06
